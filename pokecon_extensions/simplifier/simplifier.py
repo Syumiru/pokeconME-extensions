@@ -3,7 +3,7 @@ from enum import Enum, auto
 from os import path
 
 from Commands.Keys import Button, Direction, Hat
-from Commands.PythonCommandBase import ImageProcPythonCommand, StopThread, TEMPLATE_PATH
+from Commands.PythonCommandBase import ImageProcPythonCommand, StopThread
 
 
 INFINITE = -1
@@ -167,7 +167,7 @@ class Match:
         Raises:
             FileNotFoundError: _description_
         """
-        temp_path = path.join(TEMPLATE_PATH, template)
+        temp_path = path.join(ImageProcPythonCommand.template_path_name, template)
         if template == "" or not path.exists(temp_path):
             raise FileNotFoundError(temp_path)
 
@@ -183,4 +183,4 @@ class Match:
         ret = command.isContainTemplate(self.__template, self.__threshold, self.__use_gray,
                                         self.__show_value, self.__show_only_true_rect, self.__ms, self.__crop)
         if not ret:
-            raise NotMatchError(path.join(TEMPLATE_PATH, self.__template))
+            raise NotMatchError(path.join(ImageProcPythonCommand.template_path_name, self.__template))
